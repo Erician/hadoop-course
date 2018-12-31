@@ -6,7 +6,6 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import utils.TextClassificationPreparation;
 
-
 public class TextClassification {
     public static void main(String []args) throws Exception{
         if (args.length != 2) {
@@ -18,6 +17,7 @@ public class TextClassification {
         calculateFileCount(args);
         calculateTermCount(args);
         executePrediction(args);
+        TextClassificationEvaluate.evaluate();
     }
 
     private static void calculateFileCount(String []paths) throws Exception {

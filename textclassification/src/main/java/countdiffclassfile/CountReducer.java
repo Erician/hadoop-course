@@ -9,8 +9,6 @@ import java.io.IOException;
 
 public class CountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 
-    //static String CountFilesResultNamePrefix = "count-files-";
-    //private MultipleOutputs<Text, IntWritable> multipleOutputs;
     @Override
     public void reduce(Text key, Iterable<IntWritable> values, Context context)
             throws IOException, InterruptedException {
@@ -21,14 +19,5 @@ public class CountReducer extends Reducer<Text, IntWritable, Text, IntWritable> 
         context.write(key, new IntWritable(cnt));
     }
 
-//    @Override
-//    protected void setup(Context context)throws IOException, InterruptedException {
-//        multipleOutputs = new MultipleOutputs<Text, IntWritable>(context);
-//    }
-//
-//    @Override
-//    protected void cleanup(Context context)throws IOException, InterruptedException {
-//        multipleOutputs.close();
-//    }
 
 }

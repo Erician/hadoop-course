@@ -129,28 +129,23 @@ public class PredictionMapper extends Mapper<Text, BytesWritable, Text, TextPair
         //condition probility
         String []terms = new String(content.getBytes()).split("\r\n");
         for(String term : terms) {
-            //term = term.substring(0, term.length()-1);
             for(Iterator<String> classIterator=conditionProbilityHashtable.keySet().iterator();
                 classIterator.hasNext();){
                 String className=classIterator.next();
                 double conProbility = 0;
                 if(conditionProbilityHashtable.get(className).containsKey(term)) {
                     conProbility = conditionProbilityHashtable.get(className).get(term);
-                    System.out.println(className+"\t"+term+"\t"+"1"+"\t"+Math.log(conProbility)+"\n");
                 }else {
                     conProbility = (1+0)*1.0/(allTermNum);
-                    System.out.println(className+"\t"+term+"\t"+"0"+"\t"+Math.log(conProbility)+"\n");
                 }
                 probilitiesHashtable.put(className, probilitiesHashtable.get(className) + Math.log(conProbility));
-                System.out.println(className+"\t"+probilitiesHashtable.get(className)+"\n");
             }
         }
         //write
         for(Iterator<String> classIterator=probilitiesHashtable.keySet().iterator();
             classIterator.hasNext();) {
             String className = classIterator.next();
-            //context.write(key, key);
-            context.write(new Text(key.toString()+"\t"+Integer.toString(terms.length)), new predict.TextPair(new Text(className), new DoubleWritable(probilitiesHashtable.get(className))));
+            context.write(new Text(key), new predict.TextPair(new Text(className), new DoubleWritable(probilitiesHashtable.get(className))));
         }
     }
 }

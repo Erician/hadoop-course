@@ -22,9 +22,7 @@ public class TextClassificationPreparation {
     public static String EvaluateDir = "evaluate";
     public static String PredictFileResultDir = "predict-file-dir";
     public static String PredictFileResult = "predict-file";
-
-    public static String ModelFileName = "model";
-    public static String ReduceResult = "part-r-00000";
+    public static String EvaluateFileResult = "evaluate-file";
 
     public static void randomSelectTextsForClassification(String []paths)
         throws IOException {
